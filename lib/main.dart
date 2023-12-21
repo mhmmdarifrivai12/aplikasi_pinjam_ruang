@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           return GetMaterialApp(
-            title: "Application",
+            title: "Pinjam Ruang | UTI",
             initialRoute:
                 snapshot.data != null && snapshot.data!.emailVerified == true
                     ? Routes.HOME

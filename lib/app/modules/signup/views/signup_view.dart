@@ -13,7 +13,7 @@ class SignupView extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Form Login',
+      title: 'Sign Up Pinjam Ruang | UTI',
       home: Scaffold(
         backgroundColor: _backgroundColor,
         body: ListView(
@@ -78,7 +78,7 @@ class SignupView extends GetView<SignupController> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Sign Up',
+                                  'Sign Up Account',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -170,7 +170,7 @@ class SignupView extends GetView<SignupController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have account?",
+                          "Have an account?",
                           style: TextStyle(color: Colors.black38, fontSize: 13),
                         ),
                         SizedBox(width: 5),

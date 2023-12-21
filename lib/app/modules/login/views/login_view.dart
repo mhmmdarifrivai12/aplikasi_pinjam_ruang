@@ -11,7 +11,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Form Login',
+      title: 'Login Pinjam Ruang | UTI',
       home: Scaffold(
         backgroundColor: _backgroundColor,
         body: ListView(
@@ -35,7 +35,7 @@ class LoginView extends GetView<LoginController> {
                   Container(
                     height: 40,
                     width: 40,
-                    child: Image.network('https://i.ibb.co/KN2CZCQ/uti.png'),
+                    child: Image.network('https://i.ibb.co/k34YnYr/uti.png'),
                   ),
                   Text(
                     'Universitas Teknokrat Indonesia',
