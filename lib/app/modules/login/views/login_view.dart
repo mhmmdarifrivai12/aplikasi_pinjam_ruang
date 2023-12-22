@@ -11,7 +11,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login Pinjam Ruang | UTI',
+      title: 'Login PinjamRuang | UTI',
       home: Scaffold(
         backgroundColor: _backgroundColor,
         body: ListView(
