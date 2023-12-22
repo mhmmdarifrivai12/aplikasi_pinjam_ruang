@@ -43,7 +43,7 @@ class DashboardRuang extends StatefulWidget {
 class _DashboardRuangState extends State<DashboardRuang> {
   int _selectedIndex = 0;
   final cAuth = Get.find<AuthController>();
-
+  String selectedGedung = 'Gedung A';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,51 +101,147 @@ class _DashboardRuangState extends State<DashboardRuang> {
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(
+              bottom: 25,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedGedung = 'Gedung A';
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedGedung == 'Gedung A'
+                        ? Colors.black87
+                        : Color.fromRGBO(246, 247, 248, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    fixedSize: Size(100, 35),
+                  ),
+                  child: Text('Ged A',
+                      style: TextStyle(
+                        color: selectedGedung == 'Gedung A'
+                            ? Colors.white
+                            : Colors.black,
+                      )),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedGedung = 'Gedung GSG';
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedGedung == 'Gedung GSG'
+                        ? Colors.black87
+                        : Color.fromRGBO(246, 247, 248, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    fixedSize: Size(100, 35),
+                  ),
+                  child: Text('Ged GSG',
+                      style: TextStyle(
+                        color: selectedGedung == 'Gedung GSG'
+                            ? Colors.white
+                            : Colors.black,
+                      )),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedGedung = 'Gedung ICT';
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedGedung == 'Gedung ICT'
+                        ? Colors.black87
+                        : Color.fromRGBO(246, 247, 248, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    fixedSize: Size(100, 35),
+                  ),
+                  child: Text('Ged ICT',
+                      style: TextStyle(
+                        color: selectedGedung == 'Gedung ICT'
+                            ? Colors.white
+                            : Colors.black,
+                      )),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedGedung = 'Gedung B';
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedGedung == 'Gedung B'
+                        ? Colors.black87
+                        : Color.fromRGBO(246, 247, 248, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    fixedSize: Size(100, 35),
+                  ),
+                  child: Text('Ged B',
+                      style: TextStyle(
+                        color: selectedGedung == 'Gedung B'
+                            ? Colors.white
+                            : Colors.black,
+                      )),
+                )
+              ],
+            ),
+          ),
           StreamBuilder<QuerySnapshot<Object?>>(
-            stream: Get.put(DaftarruangController()).streamData(),
+            stream: Get.put(DaftarruangController())
+                .streamDataByGedung(selectedGedung),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 var listAllDocs = snapshot.data?.docs ?? [];
                 return listAllDocs.length > 0
                     ? Expanded(
                         child: ListView.builder(
-                          itemCount: listAllDocs.length,
-                          itemBuilder: (context, index) => ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: Image(
-                                width: 75,
-                                image:
-                                    NetworkImage(ImageRandom.getRandomImage()),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            title: Text(
-                              "${(listAllDocs[index].data() as Map<String, dynamic>)["namaruangan"]}",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${(listAllDocs[index].data() as Map<String, dynamic>)["gedung"]}",
-                                ),
-                                Text(
-                                  "Kapasitas ${(listAllDocs[index].data() as Map<String, dynamic>)["kapasitas"]} Kursi",
-                                ),
-                              ],
-                            ),
-                            trailing: IconButton(
-                              onPressed: () =>
-                                  showOption(listAllDocs[index].id),
-                              icon: Icon(Icons.more_vert),
+                        itemCount: listAllDocs.length,
+                        itemBuilder: (context, index) => ListTile(
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image(
+                              width: 75,
+                              image: NetworkImage(ImageRandom.getRandomImage()),
+                              fit: BoxFit.cover,
                             ),
                           ),
+                          title: Text(
+                            "${(listAllDocs[index].data() as Map<String, dynamic>)["namaruangan"]}",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${(listAllDocs[index].data() as Map<String, dynamic>)["gedung"]}",
+                              ),
+                              Text(
+                                "Kapasitas ${(listAllDocs[index].data() as Map<String, dynamic>)["kapasitas"]} Kursi",
+                              ),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            onPressed: () => showOption(listAllDocs[index].id),
+                            icon: Icon(Icons.more_vert),
+                          ),
                         ),
-                      )
+                      ))
                     : Center(
                         child: Text("Data Kosong"),
                       );
@@ -246,3 +342,73 @@ class _DashboardRuangState extends State<DashboardRuang> {
     );
   }
 }
+
+
+  //  Container(
+  //                                 child: Row(
+  //                                   children: [
+  //                                     Container(
+  //                                       margin: EdgeInsets.only(bottom: 15),
+  //                                       decoration: BoxDecoration(
+  //                                         boxShadow: [
+  //                                           BoxShadow(
+  //                                             color: const Color.fromARGB(
+  //                                                 179, 236, 236, 236),
+  //                                             blurRadius: 10.0,
+  //                                             offset: Offset(0, 3),
+  //                                             spreadRadius: 2.0,
+  //                                           ),
+  //                                         ],
+  //                                         color: Colors.white,
+  //                                         borderRadius: BorderRadius.only(
+  //                                           bottomLeft: Radius.circular(20),
+  //                                           bottomRight: Radius.circular(20),
+  //                                           topLeft: Radius.circular(20),
+  //                                           topRight: Radius.circular(20),
+  //                                         ),
+  //                                       ),
+  //                                       child: Column(
+  //                                         children: [
+  //                                           ClipRRect(
+  //                                             borderRadius: BorderRadius.only(
+  //                                                 topRight: Radius.circular(20),
+  //                                                 topLeft: Radius.circular(20)),
+  //                                             child: Image(
+  //                                               width: 140,
+  //                                               image: NetworkImage(ImageRandom
+  //                                                   .getRandomImage()),
+  //                                               fit: BoxFit.cover,
+  //                                             ),
+  //                                           ),
+  //                                           Column(
+  //                                             crossAxisAlignment:
+  //                                                 CrossAxisAlignment.start,
+  //                                             children: [
+  //                                               Text(
+  //                                                 "${(listAllDocs[index].data() as Map<String, dynamic>)["namaruangan"]}",
+  //                                                 style: TextStyle(
+  //                                                   fontSize: 18,
+  //                                                   fontWeight: FontWeight.w600,
+  //                                                 ),
+  //                                               ),
+  //                                               Text(
+  //                                                 "${(listAllDocs[index].data() as Map<String, dynamic>)["gedung"]}",
+  //                                               ),
+  //                                               Text(
+  //                                                 "Kapasitas ${(listAllDocs[index].data() as Map<String, dynamic>)["kapasitas"]} Kursi",
+  //                                               ),
+  //                                               IconButton(
+  //                                                 onPressed: () => showOption(
+  //                                                     listAllDocs[index].id),
+  //                                                 icon: Icon(Icons.add,
+  //                                                     color: Colors.black),
+  //                                               ),
+  //                                             ],
+  //                                           ),
+  //                                         ],
+  //                                       ),
+  //                                     )
+  //                                   ],
+  //                                 ),
+  //                               )),
+                    
